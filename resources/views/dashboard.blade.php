@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Jejak Sehat</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght=0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -107,123 +107,11 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             transition: 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
         }
 
         .btn-add-note:hover {
             background-color: rgb(60, 105, 96);
             transform: translateY(-2px);
-        }
-
-        /* --- FORM INPUT PERJALANAN SECTION --- */
-        .input-section {
-            width: 85%;
-            max-width: 900px;
-            background: transparent;
-            margin-bottom: 40px;
-            display: none; 
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .input-section.show {
-            display: flex;
-            opacity: 1;
-        }
-
-        .input-card {
-            display: flex;
-            width: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .input-form-side {
-            flex: 1;
-            background-color: #e2e5e4; 
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .input-form-side form {
-            width: 100%;
-            max-width: 300px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 12px 20px;
-            border-radius: 25px;
-            border: 1px solid #7a7a7a;
-            background: transparent;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            color: #333;
-            text-align: center;
-            outline: none;
-            transition: 0.3s;
-        }
-        
-        .input-field::placeholder {
-            color: #555;
-        }
-
-        .input-field:focus {
-            border-color: #517156;
-            background: rgba(255,255,255,0.3);
-        }
-
-        .btn-submit-form {
-            margin-top: 10px;
-            padding: 15px 20px;
-            border-radius: 25px;
-            border: none;
-            background-color: #517156; 
-            color: white;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .btn-submit-form:hover {
-            background-color: #3e5842;
-        }
-
-        .input-graphic-side {
-            flex: 1;
-            background-color: #88baa3; 
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .input-graphic-side h2 {
-            font-family: 'Playfair Display', serif;
-            color: white;
-            font-size: 2.5rem;
-            line-height: 1.2;
-            text-align: left;
-            width: 100%;
-            margin-bottom: 20px;
-            font-weight: normal;
-        }
-
-        .input-graphic-side img {
-            width: 180px; 
-            height: auto;
-            margin-top: 20px;
         }
 
         /* --- CONTAINER TABEL KACA TRANSLUSEN --- */
@@ -302,8 +190,7 @@
         .btn-delete { background-color: #e14d4d; color: white; }
         .btn-delete:hover { background-color: #c93c3c; }
 
-
-        /* --- SECTION GRAFIK (TOTAL PERJALANAN) --- */
+        /* --- SECTION GRAFIK --- */
         .chart-container {
             width: 85%;
             max-width: 1000px;
@@ -342,9 +229,6 @@
             height: 350px; 
         }
 
-        /* ===================================================
-           MODE RESPONSIVE (OPTIMASI HP & TABLET MAKS 768px)
-           =================================================== */
         @media (max-width: 768px) {
             .navbar {
                 width: 90%;
@@ -360,11 +244,6 @@
                 gap: 15px;
                 width: 100%;
                 text-align: center;
-            }
-
-            .navbar .menu li form {
-                display: flex;
-                justify-content: center;
             }
 
             .header-section {
@@ -383,19 +262,8 @@
                 text-align: center;
             }
 
-            .table-card, .chart-container, .input-section {
+            .table-card, .chart-container {
                 width: 90%;
-            }
-
-            .input-card {
-                flex-direction: column;
-            }
-            .input-form-side, .input-graphic-side {
-                padding: 30px 20px;
-            }
-            .input-graphic-side h2 {
-                text-align: center;
-                font-size: 2rem;
             }
 
             .table-card {
@@ -463,16 +331,16 @@
         
         <ul class="menu">
             <li><a href="/dashboard" class="active">Dashboard</a></li>
-            <li><a href="/catatan-perjalanan">Catat Perjalanan</a></li>
+            <li><a href="/catat-perjalanan">Catat Perjalanan</a></li>
             
             <li style="display: flex; align-items: center; gap: 15px; margin-left: 10px;">
-                <div style="width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <div style="width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.4);">
                     <i class="fa-solid fa-user" style="color: black; font-size: 0.9rem;"></i>
                 </div>
                 
                 <form action="/logout" method="POST" style="display: inline; margin: 0;">
                     @csrf
-                    <button type="submit" style="background: #e05252; color: white; border: none; padding: 6px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: 0.3s; font-family: 'Montserrat', sans-serif;" onmouseover="this.style.background='#c93b3b'" onmouseout="this.style.background='#e05252'">
+                    <button type="submit" style="background: #e05252; color: white; border: none; padding: 6px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: 0.3s; font-family: 'Montserrat', sans-serif;">
                         Logout
                     </button>
                 </form>
@@ -482,25 +350,7 @@
 
     <div class="header-section">
         <h1 class="dashboard-title">DASHBOARD</h1>
-        <a href="javascript:void(0)" id="btnToggleInput" class="btn-add-note">Tambahkan Catatan ++</a>
-    </div>
-
-    <div class="input-section" id="inputSectionForm">
-        <div class="input-card">
-            <div class="input-form-side">
-                <form id="travelForm">
-                    <input type="text" id="inTanggal" placeholder="Tanggal (e.g. 5 Juni 2026)" class="input-field" required>
-                    <input type="text" id="inLokasi" placeholder="Lokasi" class="input-field" required>
-                    <input type="text" id="inJarak" placeholder="Jarak (KM)" class="input-field" required>
-                    <input type="text" id="inWaktu" placeholder="Waktu (e.g. 2 Jam)" class="input-field" required>
-                    <button type="submit" class="btn-submit-form">Tambah Perjalanan</button>
-                </form>
-            </div>
-            <div class="input-graphic-side">
-                <h2>INPUT<br>PERJALANAN</h2>
-                <img src="{{ asset('images/bg-input.png') }}" alt="Ilustrasi Tanaman"> 
-            </div>
-        </div>
+        <a href="/catat-perjalanan" class="btn-add-note">Tambahkan Catatan ++</a>
     </div>
 
     <div class="table-card">
@@ -514,7 +364,7 @@
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
+            <tbody>
                 @forelse($catatanPerjalanan ?? [] as $item)
                     <tr class="data-row">
                         <td data-label="Tanggal">{{ $item['tanggal'] }}</td>
@@ -538,9 +388,6 @@
                             ['tgl' => '26 April 2026', 'tempat' => 'Bali', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
                             ['tgl' => '10 Mei 2026', 'tempat' => 'Malioboro', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
                             ['tgl' => '22 Mei 2026', 'tempat' => 'Candi Prambanan', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
-                            ['tgl' => '15 Juni 2026', 'tempat' => 'ITB', 'jarak' => 'xx', 'waktu' => 'xx Jam'],
-                            ['tgl' => '30 Juni 2026', 'tempat' => 'Curug Bogor', 'jarak' => 'xx', 'waktu' => 'xx Jam'],
-                            ['tgl' => '22 Juli 2026', 'tempat' => 'Gunung Rinjani', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
                         ];
                     @endphp
 
@@ -552,7 +399,7 @@
                         <td data-label="Waktu" class="text-center">{{ $data['waktu'] }}</td>
                         <td data-label="Aksi" class="text-center">
                             <button type="button" class="btn-action btn-edit">EDIT</button>
-                            <button type="button" class="btn-action btn-delete" onclick="handleDelete(this)">DELETE</button>
+                            <button type="button" class="btn-action btn-delete" onclick="this.closest('tr').remove();">DELETE</button>
                         </td>
                     </tr>
                     @endforeach
@@ -572,68 +419,6 @@
     </div>
 
     <script>
-        // --- TOGGLE SHOW/HIDE FORM INPUT ---
-        const btnToggleInput = document.getElementById('btnToggleInput');
-        const inputSectionForm = document.getElementById('inputSectionForm');
-
-        btnToggleInput.addEventListener('click', function() {
-            if (inputSectionForm.classList.contains('show')) {
-                inputSectionForm.classList.remove('show');
-                setTimeout(() => { inputSectionForm.style.display = 'none'; }, 400);
-                btnToggleInput.innerText = 'Tambahkan Catatan ++';
-            } else {
-                inputSectionForm.style.display = 'flex';
-                setTimeout(() => { inputSectionForm.classList.add('show'); }, 10);
-                btnToggleInput.innerText = 'Tutup Form --';
-            }
-        });
-
-        // --- PENG DUPLIKASIAN DATA LANGSUNG KE TABEL VIA JAVASCRIPT ---
-        const travelForm = document.getElementById('travelForm');
-        const tableBody = document.getElementById('tableBody');
-
-        travelForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
-
-            // Ambil data dari input field
-            const tanggal = document.getElementById('inTanggal').value;
-            const lokasi = document.getElementById('inLokasi').value;
-            const jarak = document.getElementById('inJarak').value;
-            const waktu = document.getElementById('inWaktu').value;
-
-            // Buat baris (row) baru untuk tabel
-            const newRow = document.createElement('tr');
-            newRow.classList.add('data-row');
-
-            newRow.innerHTML = `
-                <td data-label="Tanggal">${tanggal}</td>
-                <td data-label="Lokasi" class="font-semibold">${lokasi}</td>
-                <td data-label="Jarak" class="text-center">${jarak} KM</td>
-                <td data-label="Waktu" class="text-center">${waktu}</td>
-                <td data-label="Aksi" class="text-center">
-                    <button type="button" class="btn-action btn-edit">EDIT</button>
-                    <button type="button" class="btn-action btn-delete" onclick="handleDelete(this)">DELETE</button>
-                </td>
-            `;
-
-            // Masukkan data baru ke baris paling atas tabel
-            tableBody.insertBefore(newRow, tableBody.firstChild);
-
-            // Reset Form & Sembunyikan Form Kembali
-            travelForm.reset();
-            inputSectionForm.classList.remove('show');
-            setTimeout(() => { inputSectionForm.style.display = 'none'; }, 400);
-            btnToggleInput.innerText = 'Tambahkan Catatan ++';
-        });
-
-        // Fungsi untuk menghapus baris data secara langsung di mockup
-        function handleDelete(buttonElement) {
-            if (confirm('Hapus data ini?')) {
-                const row = buttonElement.closest('tr');
-                row.remove();
-            }
-        }
-
         // --- CHART.JS ---
         const ctx = document.getElementById('travelChart').getContext('2d');
         const purpleGradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -655,30 +440,14 @@
                     pointBackgroundColor: '#ffffff',
                     pointBorderColor: '#9a8cf2',
                     pointBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
+                    pointRadius: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { font: { family: 'Montserrat', size: 10 } }
-                    }
-                },
                 scales: {
-                    y: {
-                        min: 0,
-                        max: 100,
-                        ticks: { stepSize: 20, font: { family: 'Montserrat' } },
-                        grid: { color: 'rgba(0, 0, 0, 0.05)' }
-                    },
-                    x: {
-                        ticks: { font: { family: 'Montserrat' } },
-                        grid: { display: false }
-                    }
+                    y: { min: 0, max: 100, ticks: { stepSize: 20 } }
                 }
             }
         });

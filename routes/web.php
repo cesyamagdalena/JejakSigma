@@ -17,15 +17,14 @@ Route::get('/register', function () {
 
 Route::post('/proses-login', [AuthController::class, 'login']);
 Route::post('/proses-register', [AuthController::class, 'register']);
-
-// TAMBAHKAN BARIS INI
 Route::post('/logout', [AuthController::class, 'logout']);
 
-// BARU: Tambahan Route agar halaman /dashboard tidak 404
+// Halaman utama Dashboard (Tabel & Grafik)
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+// Halaman Khusus Catat Perjalanan (Form Input)
 Route::get('/catat-perjalanan', function () {
-    return view('catatperjalanan');
+    return view('catat-perjalanan');
 });
