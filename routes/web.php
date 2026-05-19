@@ -20,3 +20,12 @@ Route::post('/proses-register', [AuthController::class, 'register']);
 
 // TAMBAHKAN BARIS INI
 Route::post('/logout', [AuthController::class, 'logout']);
+
+// BARU: Tambahan Route agar halaman /dashboard tidak 404
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
+Route::get('/catat-perjalanan', function () {
+    return view('catatperjalanan');
+});

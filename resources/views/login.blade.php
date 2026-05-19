@@ -6,7 +6,6 @@
     <title>Login - Jejak Sehat</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
@@ -18,28 +17,29 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            /* Background gradient dari biru tosca ke hijau tua */
             background: linear-gradient(135deg, #4bc2c3 0%, #1e5c46 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px; /* Mencegah card menempel ke tepi layar di HP */
         }
 
-        /* Container Utama */
+        /* Container Utama (Dibuat Fleksibel) */
         .login-container {
             display: flex;
-            width: 900px;
-            height: 550px;
+            width: 100%;
+            max-width: 900px;
+            min-height: 550px; /* Menggunakan min-height agar tinggi fleksibel */
             border-radius: 30px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            overflow: hidden; /* Agar sudut yang melengkung memotong isinya */
+            overflow: hidden; 
         }
 
         /* --- Sisi Kiri (Form Login) --- */
         .login-left {
             flex: 1;
-            background-color: #dfdfdf; /* Warna abu-abu terang */
+            background-color: #dfdfdf; 
             padding: 60px 70px;
             display: flex;
             flex-direction: column;
@@ -103,6 +103,8 @@
             align-items: center;
             margin-bottom: 30px;
             font-size: 0.8rem;
+            flex-wrap: wrap; /* Agar tulisan turun rapi jika layar kekecilan */
+            gap: 10px;
         }
 
         .form-actions label {
@@ -126,7 +128,7 @@
         .btn-login {
             width: 100%;
             padding: 12px;
-            background-color: #64c5c2; /* Warna tombol tosca */
+            background-color: #64c5c2; 
             color: white;
             border: none;
             border-radius: 8px;
@@ -162,7 +164,7 @@
         /* --- Sisi Kanan (Welcome Back) --- */
         .login-right {
             flex: 1;
-            background-color: #8bb1a4; /* Warna hijau pucat */
+            background-color: #8bb1a4; 
             padding: 60px 50px;
             position: relative;
         }
@@ -174,27 +176,47 @@
             line-height: 1.2;
             letter-spacing: 2px;
             position: relative;
-            z-index: 2; /* Agar teks berada di atas gambar */
+            z-index: 2; 
         }
 
         .decoration-img {
             position: absolute;
             bottom: -30px;
             right: -30px;
-            width: 120%; /* Sesuaikan ukuran gambar abstraknya */
+            width: 120%; 
             opacity: 0.9;
             z-index: 1;
         }
 
-        /* Responsif Layar Kecil */
+        /* ===================================================
+           MODE RESPONSIVE (OPTIMASI TABLET & HP)
+           =================================================== */
+        @media (max-width: 900px) {
+            .login-container {
+                max-width: 700px; /* Penyesuaian ukuran saat di layar tablet */
+            }
+            .login-left {
+                padding: 40px 50px; /* Sedikit mengurangi padding */
+            }
+        }
+
         @media (max-width: 768px) {
             .login-container {
                 flex-direction: column;
-                width: 90%;
-                height: auto;
+                max-width: 450px; /* Lebar maksimal form saat mode vertikal di HP */
+                min-height: auto;
+            }
+            .login-left {
+                padding: 40px 30px; /* Padding dikecilkan agar input area tetap luas */
+            }
+            .login-left h1 {
+                font-size: 2rem; /* Ukuran teks disesuaikan */
+            }
+            .login-left .subtitle {
+                margin-bottom: 25px;
             }
             .login-right {
-                display: none; /* Sembunyikan bagian kanan di HP agar tidak sempit */
+                display: none; /* Sembunyikan hiasan kanan di HP sesuai desain awal */
             }
         }
     </style>
@@ -208,7 +230,6 @@
             <p class="subtitle">Please enter your login details to log in</p>
 
             <form action="/proses-login" method="POST">
-                
                 @csrf 
                 
                 <div class="input-group">

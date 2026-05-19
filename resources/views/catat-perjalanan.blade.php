@@ -498,7 +498,7 @@
             </div>
             <div class="input-graphic-side">
                 <h2>INPUT<br>PERJALANAN</h2>
-                <img src="{{ asset('images/bg-input.png') }}" alt="Ilustrasi Tanaman"> 
+                <img src="{{ asset('images/plant.png') }}" alt="Ilustrasi Tanaman"> 
             </div>
         </div>
     </div>
