@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catat Perjalanan - Jejak Sehat</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght=0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=400;600;700&family=Playfair+Display:ital,wght=0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
@@ -27,6 +27,21 @@
             flex-direction: column;
             align-items: center;
             padding-bottom: 80px;
+        }
+
+        /* --- NOTIFICATION STYLE --- */
+        .alert-error {
+            width: 80%;
+            max-width: 800px;
+            background: rgba(224, 82, 82, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e05252;
+            padding: 15px 25px;
+            border-radius: 15px;
+            color: #5c1a1a;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
         }
 
         /* --- NAVBAR STYLE --- */
@@ -77,12 +92,12 @@
         .content-container {
             width: 85%;
             max-width: 900px;
-            margin-top: 60px;
+            margin-top: 40px;
             display: flex;
             justify-content: center;
         }
 
-        /* --- CARD INPUT STYLE (GLASSMORPHISM EFFECT) --- */
+        /* --- CARD INPUT STYLE --- */
         .input-card {
             display: flex;
             width: 100%;
@@ -95,7 +110,6 @@
             border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
-        /* Sisi Kiri: Form */
         .input-form-side {
             flex: 1.2;
             background-color: rgba(235, 238, 237, 0.85); 
@@ -158,7 +172,6 @@
             transform: translateY(-1px);
         }
 
-        /* Sisi Kanan: Judul & Gambar Tumbuhan */
         .input-graphic-side {
             flex: 1;
             background-color: rgba(132, 179, 157, 0.85); 
@@ -177,65 +190,16 @@
             line-height: 1.2;
             letter-spacing: 2px;
             margin-bottom: 25px;
-            font-weight: normal;
             text-transform: uppercase;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         }
 
-        .plant-illustration {
-            width: 170px; 
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(2px 8px 15px rgba(0, 0, 0, 0.15));
-        }
-
-        /* ===================================================
-           MODE RESPONSIVE (OPTIMASI HP & TABLET MAKS 768px)
-           =================================================== */
         @media (max-width: 768px) {
-            .navbar {
-                width: 90%;
-                flex-direction: column;
-                gap: 20px;
-                border-radius: 25px;
-                padding: 20px;
-                margin-top: 20px;
-            }
-
-            .navbar .menu {
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-                text-align: center;
-            }
-
-            .content-container {
-                width: 90%;
-                margin-top: 30px;
-            }
-
-            .input-card {
-                flex-direction: column;
-                border-radius: 20px;
-            }
-
-            .input-form-side {
-                padding: 40px 20px;
-                order: 1; /* Form di atas */
-            }
-
-            .input-graphic-side {
-                padding: 40px 20px;
-                order: 2; /* Gambar pindah ke bawah form */
-            }
-
-            .input-graphic-side h2 {
-                font-size: 2.2rem;
-            }
-
-            .plant-illustration {
-                width: 130px;
-            }
+            .navbar { width: 90%; flex-direction: column; padding: 20px; }
+            .navbar .menu { flex-direction: column; gap: 15px; }
+            .content-container { width: 90%; margin-top: 30px; }
+            .input-card { flex-direction: column-reverse; }
+            .input-form-side, .input-graphic-side { padding: 40px 20px; }
+            .input-graphic-side h2 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -248,7 +212,7 @@
         
         <ul class="menu">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/catat-perjalanan" class="active">Catatan Perjalanan</a></li>
+            <li><a href="/catat-perjalanan" class="active">Catat Perjalanan</a></li>
             
             <li style="display: flex; align-items: center; gap: 15px; margin-left: 10px;">
                 <div style="width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.4);">
@@ -265,23 +229,43 @@
         </ul>
     </nav>
 
+    @if($errors->any())
+        <div class="alert-error">
+            <strong>Gagal menyimpan!</strong> Harap periksa kembali inputan Anda. (Pastikan kolom Jarak hanya diisi angka).
+        </div>
+    @endif
+
     <div class="content-container">
         <div class="input-card">
+            
             <div class="input-form-side">
-                <form action="/proses-catat" method="POST">
+                <form action="/travel" method="POST">
                     @csrf
-                    <input type="text" name="tanggal" placeholder="Tanggal (e.g. 5 Juni 2026)" class="input-field" required>
-                    <input type="text" name="lokasi" placeholder="Lokasi" class="input-field" required>
-                    <input type="text" name="jarak" placeholder="Jarak (KM)" class="input-field" required>
-                    <input type="text" name="waktu" placeholder="Waktu (e.g. 2 Jam)" class="input-field" required>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <input type="date" name="tanggal" class="form-control" style="width: 100%; padding: 12px 20px; border: 1px solid #ccc; border-radius: 50px; background-color: #f1f3f5; text-align: center;" required>
+                    </div>
+                    <div>
+                        <input type="text" name="lokasi" class="input-field" placeholder="Lokasi" required>
+                    </div>
+                    <div>
+                        <input type="number" name="jarak" class="input-field" placeholder="Jarak (Angka Saja)" required>
+                    </div>
+                    <div>
+                        <input type="text" name="waktu" class="input-field" placeholder="Waktu (e.g. 2 Jam)" required>
+                    </div>
+                    
                     <button type="submit" class="btn-submit-form">Tambah Perjalanan</button>
                 </form>
             </div>
 
             <div class="input-graphic-side">
-                <h2>INPUT<br>PERJALANAN</h2>
-                <img src="{{ asset('images/bg-input.png') }}" alt="Ilustrasi Tanaman" class="plant-illustration"> 
+                <h2>Input<br>Perjalanan</h2>
+                <div style="margin-top: 10px;">
+                    <i class="fa-solid fa-seedling" style="font-size: 7rem; color: rgba(255,255,255,0.85);"></i>
+                </div>
             </div>
+
         </div>
     </div>
 

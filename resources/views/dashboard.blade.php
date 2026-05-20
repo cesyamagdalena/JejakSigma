@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Jejak Sehat</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght=0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=400;600;700&family=Playfair+Display:ital,wght=0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -30,7 +30,22 @@
             padding-bottom: 80px;
         }
 
-        /* --- STYLING NAVBAR RESPONSIVE --- */
+        /* --- NOTIFICATION STYLE --- */
+        .alert-success {
+            width: 80%;
+            max-width: 1000px;
+            background: rgba(92, 184, 143, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid #5cb88f;
+            padding: 15px 25px;
+            border-radius: 15px;
+            color: #1e4d37;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* --- NAVBAR STYLE --- */
         .navbar {
             width: 80%;
             max-width: 800px;
@@ -81,7 +96,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 60px;
+            margin-top: 40px;
             margin-bottom: 30px;
         }
 
@@ -114,7 +129,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- CONTAINER TABEL KACA TRANSLUSEN --- */
+        /* --- CONTAINER TABEL KACA --- */
         .table-card {
             width: 85%;
             max-width: 1000px;
@@ -229,96 +244,138 @@
             height: 350px; 
         }
 
+        /* --- MODAL EDIT --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            width: 90%;
+            max-width: 750px;
+            background: linear-gradient(135deg, #70a99e 0%, #3a685e 100%);
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #555;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.2s;
+        }
+        .modal-close:hover { color: #000; }
+
+        .modal-left {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+            position: relative;
+        }
+
+        .modal-left h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .modal-left .illustration {
+            align-self: flex-start;
+            margin-top: 40px;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .modal-right {
+            flex: 1.2;
+            background: #e1e3e2;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group { margin-bottom: 15px; }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 20px;
+            border: 1px solid #7a7a7a;
+            background-color: transparent;
+            border-radius: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .btn-submit-edit {
+            width: 100%;
+            padding: 12px;
+            background-color: #4d695e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-submit-edit:hover { background-color: #384e46; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
         @media (max-width: 768px) {
-            .navbar {
-                width: 90%;
-                flex-direction: column;
-                gap: 20px;
-                border-radius: 25px;
-                padding: 20px;
-                margin-top: 20px;
-            }
-
-            .navbar .menu {
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-                text-align: center;
-            }
-
-            .header-section {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-                margin-top: 40px;
-                margin-bottom: 20px;
-            }
-
+            .navbar { width: 90%; flex-direction: column; gap: 20px; padding: 20px; }
+            .navbar .menu { flex-direction: column; gap: 15px; }
+            .header-section { flex-direction: column; gap: 15px; text-align: center; }
             .dashboard-title { font-size: 2rem; }
-
-            .btn-add-note {
-                width: 100%;
-                max-width: 280px;
-                text-align: center;
-            }
-
-            .table-card, .chart-container {
-                width: 90%;
-            }
-
-            .table-card {
-                padding: 15px;
-                border-radius: 25px;
-                margin-bottom: 25px;
-            }
-
+            .table-card, .chart-container { width: 90%; }
             table, thead, tbody, th, td, tr { display: block; }
             thead tr { position: absolute; top: -9999px; left: -9999px; }
-
-            tr.data-row {
-                margin-bottom: 15px;
-                border-radius: 20px !important;
-                padding: 12px 8px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-                border: 1px solid rgba(255,255,255,0.2);
-            }
-
-            td {
-                border: none;
-                position: relative;
-                padding-left: 45% !important; 
-                text-align: left !important;
-                margin-bottom: 8px;
-                font-size: 0.95rem;
-            }
-
-            td:first-child { border-radius: 0; }
-            td:last-child { 
-                border-radius: 0;
-                margin-bottom: 0;
-                padding-left: 15px !important;
-                text-align: center !important;
-                border-top: 1px solid rgba(0, 0, 0, 0.08);
-                padding-top: 15px;
-                margin-top: 10px;
-            }
-
-            td::before {
-                position: absolute;
-                top: 14px;
-                left: 15px;
-                width: 35%;
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 700;
-                font-size: 0.8rem;
-                color: #333;
-                content: attr(data-label);
-                text-transform: uppercase;
-            }
-            
-            .btn-action { padding: 8px 20px; font-size: 0.8rem; }
-            .chart-container { padding: 20px 15px; border-radius: 20px; }
-            .chart-wrapper { height: 260px; }
+            tr.data-row { margin-bottom: 15px; padding: 12px 8px; }
+            td { border: none; padding-left: 45% !important; text-align: left !important; }
+            td:last-child { padding-left: 15px !important; text-align: center !important; }
+            td::before { position: absolute; top: 14px; left: 15px; width: 35%; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; content: attr(data-label); text-transform: uppercase; }
+            .modal-card { flex-direction: column; }
+            .modal-left .illustration { display: none; }
         }
     </style>
 </head>
@@ -348,6 +405,12 @@
         </ul>
     </nav>
 
+    @if(session('success'))
+        <div class="alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="header-section">
         <h1 class="dashboard-title">DASHBOARD</h1>
         <a href="/catat-perjalanan" class="btn-add-note">Tambahkan Catatan ++</a>
@@ -367,13 +430,16 @@
             <tbody>
                 @forelse($catatanPerjalanan ?? [] as $item)
                     <tr class="data-row">
-                        <td data-label="Tanggal">{{ $item['tanggal'] }}</td>
-                        <td data-label="Lokasi" class="font-semibold">{{ $item['lokasi'] }}</td>
-                        <td data-label="Jarak" class="text-center">{{ $item['jarak'] }} KM</td>
-                        <td data-label="Waktu" class="text-center">{{ $item['waktu'] }}</td>
+                        <td data-label="Tanggal">{{ $item->tanggal }}</td>
+                        <td data-label="Lokasi" class="font-semibold">{{ $item->lokasi }}</td>
+                        <td data-label="Jarak" class="text-center">{{ $item->jarak }} KM</td>
+                        <td data-label="Waktu" class="text-center">{{ $item->waktu }}</td>
                         <td data-label="Aksi" class="text-center">
-                            <a href="/travel/{{ $item['id'] }}/edit" class="btn-action btn-edit">EDIT</a>
-                            <form action="/travel/{{ $item['id'] }}" method="POST" style="display: inline;">
+                            <button type="button" class="btn-action btn-edit" 
+                                onclick="openEditModal('{{ $item->id }}', '{{ $item->tanggal }}', '{{ $item->lokasi }}', '{{ $item->jarak }}', '{{ $item->waktu }}')">
+                                EDIT
+                            </button>
+                            <form action="/travel/{{ $item->id }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Hapus data ini?')" class="btn-action btn-delete">DELETE</button>
@@ -383,22 +449,25 @@
                 @empty
                     @php
                         $sampleData = [
-                            ['tgl' => '2 April 2026', 'tempat' => 'Bogor', 'jarak' => 'xx', 'waktu' => 'xx Jam'],
-                            ['tgl' => '15 April 2026', 'tempat' => 'Yogyakarta', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
-                            ['tgl' => '26 April 2026', 'tempat' => 'Bali', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
-                            ['tgl' => '10 Mei 2026', 'tempat' => 'Malioboro', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
-                            ['tgl' => '22 Mei 2026', 'tempat' => 'Candi Prambanan', 'jarak' => 'xx', 'waktu' => 'xx Hari'],
+                            ['id' => 1, 'tanggal' => '2 April 2026', 'lokasi' => 'Bogor', 'jarak' => '12', 'waktu' => '2 Jam'],
+                            ['id' => 2, 'tanggal' => '15 April 2026', 'lokasi' => 'Yogyakarta', 'jarak' => '450', 'waktu' => '1 Hari'],
+                            ['id' => 3, 'tanggal' => '26 April 2026', 'lokasi' => 'Bali', 'jarak' => '900', 'waktu' => '2 Hari'],
+                            ['id' => 4, 'tanggal' => '10 Mei 2026', 'lokasi' => 'Malioboro', 'jarak' => '5', 'waktu' => '1 Jam'],
+                            ['id' => 5, 'tanggal' => '22 Mei 2026', 'lokasi' => 'Candi Prambanan', 'jarak' => '18', 'waktu' => '3 Jam'],
                         ];
                     @endphp
 
                     @foreach($sampleData as $data)
                     <tr class="data-row">
-                        <td data-label="Tanggal">{{ $data['tgl'] }}</td>
-                        <td data-label="Lokasi" class="font-semibold">{{ $data['tempat'] }}</td>
+                        <td data-label="Tanggal">{{ $data['tanggal'] }}</td>
+                        <td data-label="Lokasi" class="font-semibold">{{ $data['lokasi'] }}</td>
                         <td data-label="Jarak" class="text-center">{{ $data['jarak'] }} KM</td>
                         <td data-label="Waktu" class="text-center">{{ $data['waktu'] }}</td>
                         <td data-label="Aksi" class="text-center">
-                            <button type="button" class="btn-action btn-edit">EDIT</button>
+                            <button type="button" class="btn-action btn-edit" 
+                                onclick="alert('Ini adalah data contoh. Silakan tambahkan catatan baru terlebih dahulu untuk mencoba fitur EDIT asli.')">
+                                EDIT
+                            </button>
                             <button type="button" class="btn-action btn-delete" onclick="this.closest('tr').remove();">DELETE</button>
                         </td>
                     </tr>
@@ -410,7 +479,7 @@
 
     <div class="chart-container">
         <div class="chart-header">
-            <h3>Total Perjalanan</h3>
+            <h3>Total Perjalanan (KM)</h3>
             <a href="#" class="btn-more">More</a>
         </div>
         <div class="chart-wrapper">
@@ -418,36 +487,113 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="editModalOverlay">
+        <div class="modal-card">
+            <div class="modal-close" onclick="closeEditModal()">&times;</div>
+            
+            <div class="modal-left">
+                <h2>Edit<br>Perjalanan</h2>
+                <div class="illustration">
+                    <i class="fa-solid fa-leaf" style="font-size: 5rem; color: rgba(255,255,255,0.7);"></i>
+                </div>
+            </div>
+            
+            <div class="modal-right">
+                <form id="editTravelForm" action="" method="POST">
+                    @csrf
+                    @method('PUT')
+                    
+                    <div class="form-group">
+                        <input type="text" name="tanggal" id="modal-tanggal" class="form-control" placeholder="Tanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="lokasi" id="modal-lokasi" class="form-control" placeholder="Lokasi" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" step="any" name="jarak" id="modal-jarak" class="form-control" placeholder="Jarak (Angka Saja)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="waktu" id="modal-waktu" class="form-control" placeholder="Waktu" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit-edit">Simpan Perubahan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // --- CHART.JS ---
+        const modalOverlay = document.getElementById('editModalOverlay');
+        const editForm = document.getElementById('editTravelForm');
+
+        function openEditModal(id, tanggal, lokasi, jarak, waktu) {
+            const cleanJarak = jarak.replace(' KM', '').trim();
+
+            document.getElementById('modal-tanggal').value = tanggal;
+            document.getElementById('modal-lokasi').value = lokasi;
+            document.getElementById('modal-jarak').value = cleanJarak;
+            document.getElementById('modal-waktu').value = waktu;
+            
+            editForm.action = `/travel/${id}`;
+            modalOverlay.classList.add('active');
+        }
+
+        function closeEditModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) closeEditModal();
+        });
+
+        // --- DINAMISASI DATA CHART ---
+        const labels = [];
+        const dataJarak = [];
+
+        const rows = document.querySelectorAll('table tbody tr.data-row');
+        rows.forEach(row => {
+            const tglEl = row.querySelector('td[data-label="Tanggal"]');
+            const jrkEl = row.querySelector('td[data-label="Jarak"]');
+            if(tglEl && jrkEl){
+                const tgl = tglEl.innerText;
+                const jrkText = jrkEl.innerText;
+                const jrkVal = parseFloat(jrkText.replace(' KM', '')) || 0;
+                
+                labels.push(tgl);
+                dataJarak.push(jrkVal);
+            }
+        });
+
+        labels.reverse();
+        dataJarak.reverse();
+
         const ctx = document.getElementById('travelChart').getContext('2d');
-        const purpleGradient = ctx.createLinearGradient(0, 0, 0, 300);
-        purpleGradient.addColorStop(0, 'rgba(186, 172, 245, 0.6)');
-        purpleGradient.addColorStop(1, 'rgba(186, 172, 245, 0.05)');
+        const greenGradient = ctx.createLinearGradient(0, 0, 0, 300);
+        greenGradient.addColorStop(0, 'rgba(92, 184, 143, 0.6)');
+        greenGradient.addColorStop(1, 'rgba(92, 184, 143, 0.05)');
 
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+                labels: labels.length ? labels : ['Belum Ada Data'],
                 datasets: [{
-                    label: '2026',
-                    data: [56, 64, 76, 78, 70, 37],
-                    borderColor: '#9a8cf2',
-                    borderWidth: 2,
-                    backgroundColor: purpleGradient,
+                    label: 'Jarak Tempuh (KM)',
+                    data: dataJarak.length ? dataJarak : [0],
+                    backgroundColor: greenGradient,
+                    borderColor: '#4da37d',
+                    borderWidth: 3,
                     fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderColor: '#9a8cf2',
-                    pointBorderWidth: 2,
-                    pointRadius: 4
+                    tension: 0.3,
+                    pointBackgroundColor: '#3a685e',
+                    pointRadius: 5
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    y: { min: 0, max: 100, ticks: { stepSize: 20 } }
+                    y: { beginAtZero: true, grid: { color: 'rgba(0, 0, 0, 0.05)' } },
+                    x: { grid: { display: false } }
                 }
             }
         });
